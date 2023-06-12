@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, presence: true
 
-  NAME_REGEX = /\A[ぁ-んァ-ヶ一-龥々]+\z/.freeze
+  NAME_REGEX = /\A[ぁ-んァ-ヶ一-龥々ー]+\z/.freeze
 
   validates_format_of :last_name, with: NAME_REGEX, message: 'is invalid. Input full-width character' 
   validates_format_of :first_name, with: NAME_REGEX, message: 'is invalid. Input full-width characters'
