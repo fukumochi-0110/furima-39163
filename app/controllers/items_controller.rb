@@ -5,6 +5,8 @@ class ItemsController < ApplicationController
   end
 
   def new
+    @item = Item.new
+
     if user_signed_in?
       render :new
     else
@@ -13,7 +15,13 @@ class ItemsController < ApplicationController
   end
 
   def create
+    @item = Item.new(item_params)
     
+    if @item.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   private
@@ -21,5 +29,9 @@ class ItemsController < ApplicationController
     authenticate_or_request_with_http_basic do |username, password|
       username == ENV["BASIC_AUTH_USER"] && password == ENV["BASIC_AUTH_PASSWORD"]
     end
+  end
+
+  def item_params
+    params.require(:item).permit(:item_name, :explanation, :category_id, :condition_id, :burden_id, :prefecture_id, :duration_id, :price, :user, :image).merge(user_id: current_user.id)
   end
 end
