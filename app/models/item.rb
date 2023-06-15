@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
-  validates :item_name, :explanation,  :price, :image, presence: true
+  validates :item_name, :explanation, :price, :image, presence: true
   validates :category_id, :condition_id, :burden_id, :prefecture_id, :duration_id, presence: true, numericality: { other_than: 1 ,message: "can't be blank" }
-
+  validates :price, inclusion: { in: 300..9999999 }
   # has_one :order
   belongs_to :user
   has_one_attached :image
