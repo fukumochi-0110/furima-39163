@@ -11,9 +11,8 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :category, numericality: { other_than: 1, message: "can't be blank" }
-  belongs_to :prefecture, numericality: { other_than: 1, message: "can't be blank" }
-  belongs_to :condition, numericality: { other_than: 1, message: "can't be blank" }
-  belongs_to :burden, numericality: { other_than: 1, message: "can't be blank" }
-  belongs_to :duration, numericality: { other_than: 1, message: "can't be blank" }
-end
+  belongs_to :category
+  belongs_to :prefecture
+  belongs_to :condition
+  belongs_to :burden
+  belongs_to :duration
