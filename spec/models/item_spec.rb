@@ -55,7 +55,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Duration can't be blank")
       end
       it '価格の情報が必須であること' do
-        @item.price = 1
+        @item.price = ""
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end

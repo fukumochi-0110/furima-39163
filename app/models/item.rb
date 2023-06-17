@@ -16,3 +16,4 @@ class Item < ApplicationRecord
   belongs_to :condition
   belongs_to :burden
   belongs_to :duration
+end
