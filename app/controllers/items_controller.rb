@@ -1,6 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :basic_auth
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index]
 
   def index
     
@@ -8,12 +7,6 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
-
-    if user_signed_in?
-      render :new
-    else
-      redirect_to new_user_session_path
-    end
   end
 
   def create
@@ -27,11 +20,6 @@ class ItemsController < ApplicationController
   end
 
   private
-  def basic_auth
-    authenticate_or_request_with_http_basic do |username, password|
-      username == ENV["BASIC_AUTH_USER"] && password == ENV["BASIC_AUTH_PASSWORD"]
-    end
-  end
 
   def item_params
     params.require(:item).permit(:item_name, :explanation, :category_id, :condition_id, :burden_id, :prefecture_id, :duration_id, :price, :user, :image).merge(user_id: current_user.id)
