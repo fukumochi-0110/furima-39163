@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-
-
 RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item)
@@ -9,7 +7,7 @@ RSpec.describe Item, type: :model do
 
   describe '商品出品機能' do
     context '商品出品できる場合' do
-      it "必要な情報を適切に入力して「出品する」ボタンを押すと、商品情報がデータベースに保存される" do
+      it '必要な情報を適切に入力して「出品する」ボタンを押すと、商品情報がデータベースに保存される' do
         expect(@item).to be_valid
       end
     end
@@ -20,12 +18,12 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
       it '商品名が必須であること' do
-        @item.item_name = ""
+        @item.item_name = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Item name can't be blank")
       end
       it '商品の説明が必須であること' do
-        @item.explanation = ""
+        @item.explanation = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Explanation can't be blank")
       end
@@ -55,29 +53,29 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Duration can't be blank")
       end
       it '価格の情報が必須であること' do
-        @item.price = ""
+        @item.price = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
       it '商品価格が299円以下では出品できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is out of setting range.")
+        expect(@item.errors.full_messages).to include('Price is out of setting range.')
       end
       it '商品価格が10_000_000円以上では出品できない' do
         @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is out of setting range.")
+        expect(@item.errors.full_messages).to include('Price is out of setting range.')
       end
       it '価格は半角数値のみ保存可能であること' do
-        @item.price = "４００"
+        @item.price = '４００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is invalid. Input half-numbers.")
+        expect(@item.errors.full_messages).to include('Price is invalid. Input half-numbers.')
       end
       it 'userが紐ついていなければ出品できない' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist")
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
