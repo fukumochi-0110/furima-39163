@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :item do
     item_name { Faker::Food.fruits }
-    explanation { Faker::String.random(length: 3..12) }
+    explanation { Faker::Lorem.sentence(word_count: 5) }
     category_id { Faker::Number.between(from: 2, to: 11) }
     condition_id { Faker::Number.between(from: 2, to: 7) }
     burden_id { Faker::Number.between(from: 2, to: 3) }
