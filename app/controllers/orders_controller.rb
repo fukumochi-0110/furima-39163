@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
   before_action :same_action, only: [:index, :create]
   before_action :move_to_index, only: [:index]
 
