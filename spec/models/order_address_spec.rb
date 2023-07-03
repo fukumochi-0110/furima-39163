@@ -8,7 +8,6 @@ RSpec.describe OrderAddress, type: :model do
       item = FactoryBot.create(:item, user_id: user.id)
       order = FactoryBot.create(:order, user_id: user.id, item_id: item.id)
       @order_address = FactoryBot.build(:order_address, order_id: order.id)
-      sleep 0.1
     end
 
     
@@ -73,6 +72,11 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.phone_number = '１１１１１１１１１１１'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone number is invalid. Input only number")
+      end
+      it "tokenが空では登録できないこと" do
+        @order_address.token = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Token can't be blank")
       end
     end
   end
