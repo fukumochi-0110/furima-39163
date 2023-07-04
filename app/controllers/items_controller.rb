@@ -66,7 +66,7 @@ class ItemsController < ApplicationController
     if @item.order && current_user.id == @item.user.id
       redirect_to root_path
     else
-      redirect_to root_path
+      redirect_to edit_item_path(@item)
     end
   end
 end
