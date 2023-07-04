@@ -6,8 +6,8 @@ RSpec.describe OrderAddress, type: :model do
     before do
       user = FactoryBot.create(:user)
       item = FactoryBot.create(:item)
-      order = FactoryBot.create(:order, user_id: user.id, item_id: item.id)
-      @order_address = FactoryBot.build(:order_address, order_id: order.id)
+      order = FactoryBot.create(:order, item_id: item.id, user_id: user.id)
+      @order_address = FactoryBot.build(:order_address, user_id: order.user_id, item_id: order.item_id)
     end
 
     
