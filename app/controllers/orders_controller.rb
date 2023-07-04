@@ -2,9 +2,9 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :same_action, only: [:index, :create]
   before_action :move_to_index, only: [:index]
+  before_action :purchased_item, only: [:index]
 
   def index
-
     @order_address = OrderAddress.new
   end
 
@@ -32,7 +32,6 @@ class OrdersController < ApplicationController
   end
   
   def pay_item
-    binding.pry
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       Payjp::Charge.create(
         amount: @item.price,
@@ -48,6 +47,20 @@ class OrdersController < ApplicationController
   def move_to_index
     if user_signed_in? && current_user.id == @item.user.id
       redirect_to root_path
+    end
+  end
+
+  def purchased_item
+    @item = Item.find(params[:item_id])
+    @order = Order.includes(:item).find_by(id: params[:item_id])
+    @order_address = OrderAddress.new
+    return if @order.nil?
+    if current_user.id != @item.user.id
+      if @order.item_id == @item.id
+        redirect_to root_path
+      else
+        render :index, locals: {order_address: @order_address}
+      end
     end
   end
 end
