@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :same_action, only: [:index, :create]
+  before_action :same_action, only: [:index, :create, :purchased_item]
   before_action :move_to_index, only: [:index]
   before_action :purchased_item, only: [:index]
 
@@ -51,7 +51,6 @@ class OrdersController < ApplicationController
   end
 
   def purchased_item
-    @item = Item.find(params[:item_id])
     @order = Order.includes(:item).find_by(id: params[:item_id])
     @order_address = OrderAddress.new
     return if @order.nil?
