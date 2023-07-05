@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :same_action, only: [:show, :edit, :update, :destroy, :Purchased_item_edit]
+  before_action :same_action, only: [:show, :edit, :update, :destroy, :purchased_item_edit]
   before_action :move_to_index, only: [:edit, :update, :destroy]
   before_action :Purchased_item_edit, only: [:edit]
 
