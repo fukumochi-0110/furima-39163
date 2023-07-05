@@ -7,7 +7,7 @@ class Item < ApplicationRecord
             numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'is out of setting range.' }
   validates :price, numericality: { only_integer: true, message: 'is invalid. Input half-numbers.' }
 
-  has_one :order, dependent: :destroy
+  has_one :order
   belongs_to :user
   has_one_attached :image
 

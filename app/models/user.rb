@@ -23,5 +23,5 @@ class User < ApplicationRecord
   validates_format_of :first_name_kana, with: KATAKANA_REGEX, message: 'is invalid. Input full-width katakana characters'
 
   has_many :items
-  has_many :orders, dependent: :destroy
+  has_many :orders
 end

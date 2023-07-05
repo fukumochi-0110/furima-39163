@@ -51,14 +51,9 @@ class OrdersController < ApplicationController
 
   def purchased_item
     @order = Order.includes(:item).find_by(id: params[:item_id])
-    @order_address = OrderAddress.new
     return if @order.nil?
-    if current_user.id != @item.user.id
-      if @order.item_id == @item.id
-        redirect_to root_path
-      else
-        render :index, locals: {order_address: @order_address}
-      end
+    if @item.order.present?
+      redirect_to root_path
     end
   end
 end
