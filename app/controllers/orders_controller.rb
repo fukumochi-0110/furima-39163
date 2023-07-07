@@ -1,7 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :same_action, only: [:index, :create, :purchased_item]
-  before_action :move_to_index, only: [:index]
   before_action :purchased_item, only: [:index]
 
   def index
@@ -43,16 +42,16 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
-  def move_to_index
-    if user_signed_in? && current_user.id == @item.user.id
-      redirect_to root_path
-    end
-  end
+  #def move_to_index
+  #  if user_signed_in? && current_user.id == @item.user.id
+  #    redirect_to root_path
+  #  end
+  #end
 
   def purchased_item
-    @order = Order.includes(:item).find_by(id: params[:item_id])
-    return if @order.nil?
-    if current_user.id != @item.user.id && @item.order.present?
+    #@order = Order.includes(:item).find_by(id: params[:item_id])
+    #return if @order.nil?
+    if current_user.id == @item.user.id || @item.order.present?
       redirect_to root_path
     end
   end
