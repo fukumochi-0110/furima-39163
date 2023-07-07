@@ -42,15 +42,7 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
-  #def move_to_index
-  #  if user_signed_in? && current_user.id == @item.user.id
-  #    redirect_to root_path
-  #  end
-  #end
-
   def purchased_item
-    #@order = Order.includes(:item).find_by(id: params[:item_id])
-    #return if @order.nil?
     if current_user.id == @item.user.id || @item.order.present?
       redirect_to root_path
     end
