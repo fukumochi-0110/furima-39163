@@ -51,11 +51,10 @@ class OrdersController < ApplicationController
 
   def purchased_item
     @order = Order.includes(:item).find_by(id: params[:item_id])
+
     return if @order.nil?
-    if current_user.id != @item.user.id 
-      if @item.order.present?
-        redirect_to root_path
-      end
+    if current_user.id != @item.user.id || @item.order.present?
+      redirect_to root_path
     end
   end
 end
