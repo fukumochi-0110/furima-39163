@@ -74,4 +74,4 @@ gem 'image_processing', '~> 1.2'
 gem 'active_hash'
 gem 'payjp'
 gem "aws-sdk-s3", require: false
-gem 'date', '~> 3.3.3'
+gem 'mail', '2.7.1'
