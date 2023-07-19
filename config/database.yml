@@ -47,16 +47,10 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-# 元の記述
-# production:
-#  <<: *default
-#  database: furima_39163_production
-#  username: furima_39163
-#  password: <%= ENV['FURIMA_39163_DATABASE_PASSWORD'] %>
 production:
   <<: *default
-    adapter: mysql2
-    database: （アプリ名）_production
-    username: root
-    password: <%= ENV['DATABASE_PASSWORD'] %>
-    socket: /var/lib/mysql/mysql.sock
+  adapter: mysql2
+  database: furima-39163_production
+  username: root
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  socket: /var/lib/mysql/mysql.sock
